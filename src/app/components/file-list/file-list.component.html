@@ -1,0 +1,45 @@
+<div class="container mt-5">
+
+    <div class="text-center mb-5">
+        <h2>All Files</h2>
+    </div>
+
+    <div class="mb-5">
+        <form enctype="multipart/form-data">
+            <input type="file" (change)="selectFile($event)">
+            <button [disabled]="!selectedFiles" (click)="upload()">Upload</button>
+        </form>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Preview</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <ng-template ngFor let-tempFile [ngForOf]="fileList">
+                <tr>
+                    <td>
+                        <img [src]="previewFileImage(tempFile)" style="max-height: 90px;width: 110px;" />
+                    </td>
+
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+                                Actions
+                            </button>
+
+                            <div class="dropdown-menu">
+                                <button class=" dropdown-item">Details</button>
+                                <button class="dropdown-item" (click)="downloadFile(tempFile.fileId)">Download</button>
+                                <button class="dropdown-item" (click)="deleteFile(tempFile.fileId)">Delete</button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+        </tbody>
+    </table>
+</div>
